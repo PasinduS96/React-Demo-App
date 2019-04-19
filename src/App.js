@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Header from './components/Header';
+import Home from './components/Home';
+import RegisterForm from './components/RegisterForm';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import ContactHome from './components/ContactHome';
+import { Provider } from './Context';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+	render() {
+		return (
+			<Router>
+				<Provider>
+					<div className="App">
+						<Header branding="Contact Manager" />
+					</div>
+
+					<Switch>
+						<Route exact path="/" component={Home} />
+						<div className="container" style={{ padding: '20px' }}>
+							<Route exact path="/Contacts" component={ContactHome} />
+							<Route exact path="/register" component={RegisterForm} />
+						</div>
+					</Switch>
+				</Provider>
+			</Router>
+		);
+	}
 }
 
 export default App;
